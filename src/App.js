@@ -1,23 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import SearchForm from './components/search_form';
+import FilterForm from './components/fiter_form';
+import ListTodo from './components/list_todo';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+     <h1 className="title">TODO </h1>
+     <SearchForm/>
+     <FilterForm/>
+     <ListTodo/>
     </div>
   );
 }
