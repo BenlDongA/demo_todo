@@ -41,3 +41,8 @@ padding-top: 5px;
 cursor: pointer;
 }
 
+/* Trong file CSS của bạn */
+.selected {
+  background-color: yellow; /* Màu nền bạn muốn cho các item đã chọn */
+  /* Các thuộc tính CSS khác bạn muốn áp dụng cho các item đã chọn */
+}

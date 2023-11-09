@@ -1,49 +1,39 @@
+import { useState } from "react";
+import ModalForm from "./modal_form";
 
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-function SearchForm(){
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    return(
-        <div className="SeachForm">
-            <form className="row">
-                <div className="col-9">
-                <input 
-                type="text" 
-                className="form-control " 
-                placeholder="Input search key"/>
-                </div>
-               <div className="col-3">
-                
-               <button onClick={handleShow}
-               type="button" class="btn btn-primary">
-                Create</button>
-               </div>
+function SearchForm(props) {
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
 
-            </form>
-            <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Create new todo</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>       
-            <input 
-                type="text" 
-                className="form-control " 
-                placeholder="Enter todo"/>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Create
-          </Button>
-          <Button variant="secondary" onClick={handleClose}>
-           Close
-          </Button>
-        </Modal.Footer>
-      </Modal>  
+  return (
+    <div className="SearchForm">
+      <form className="row">
+        <div className="col-9"> 
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Input Search key"
+          />
         </div>
-        
-    )
+        <div className="col-3">
+          <button
+            onClick={handleShow}
+            type="button"
+            className="btn btn-primary"
+          >
+            Create
+          </button>
+        </div>
+      </form>
+      <ModalForm
+      addTodos={props.addTodos}
+        buttonText="Create"
+        title="Create new todo"
+        show={show}
+        handleClose={setShow}
+      />
+    </div>
+  );
 }
-export default SearchForm
+
+export default SearchForm;

@@ -1,79 +1,64 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import ModalForm from "./modal_form";
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 function Item(props) {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [showDelete, setShowDelete] = useState(false);  
-  const handleCloseDelete = () => setShowDelete(false); 
-  const handleShowDelete = () => setShowDelete(true); 
-  const [isClicked, setIsClicked] = useState(false);
+  const [showdelete, setDeleteShow] = useState(false);
+  const handleShowDelete = () => setDeleteShow(true);
+  const handleCloseDelete = () => setDeleteShow(false);
 
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
-
-  const borderStyle = isClicked ? { border: '2px solid blue' } : {};
-
-
+  
 
   return (
-    <div
-    onClick={handleClick}
-    className="Item row"
-    style={borderStyle}
-   
-  >
-      <div className="text col-10">{props.name}</div>
+    <div className="Item row ">
+      <div className="col-10">{props.name}</div>
       <div className="col-1">
-        <button onClick={handleShowDelete} className="btn btn-danger"> 
-          <i className="fa fa-trash "></i>
+        <button onClick={handleShowDelete} className="btn btn-danger">
+          <i className="fa fa-trash"></i>
         </button>
       </div>
-      <div className="col-1">   
-        <button onClick={handleShow} className="btn btn-info"> 
+      <div className="col-1">
+        <button onClick={handleShow} className="btn btn-info">
           <i className="fa fa-edit"></i>
         </button>
       </div>
+      <ModalForm
+        editTodos={props.editTodos}
+        buttonText="Edit"
+        title="Edit todo"
+        show={show}
+        handleClose={setShow}
+        index={props.index}
+        name={props.name}
+        isEditMode={true}
+      />
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={showdelete} onHide={handleCloseDelete}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit this todo</Modal.Title> 
+          <Modal.Title>Delete this Todo</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Go to suppermarket</Modal.Body>
+        <Modal.Body>Are You Sure ?????? </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Save
+          <Button
+            variant="danger"
+            onClick={() => {
+              handleCloseDelete();
+              props.deleteTodo(props.index);
+            }}
+          >
+            Delete
           </Button>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleCloseDelete}>
             Close
           </Button>
         </Modal.Footer>
       </Modal>
-
-      <Modal show={showDelete} onHide={handleCloseDelete}> 
-        <Modal.Header closeButton>
-          <Modal.Title>Delete this todo</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            Are you sure you want to delete this todo?<br />
-            This action cannot be undone.
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleCloseDelete}> 
-            Delete
-          </Button>
-          <Button variant="secondary" onClick={handleCloseDelete}>
-            Cancel
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
-  );
+  );  
 }
 
 export default Item;

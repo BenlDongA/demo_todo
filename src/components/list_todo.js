@@ -1,20 +1,20 @@
 import Item from "./item"
-
-function ListTodo(){
+// import { useState } from "react"
+function ListTodo(props){
+    
+   let datas = props.listTodos.map((item, index)=>{
+        return <Item 
+        deleteTodo={props.deleteTodo} 
+        key={index} 
+        name={item.name} 
+        index={index}
+        editTodos={props.editTodos}/>
+    })
     return(
         <div className="ListTodo">
+           {datas}
            
-            <Item
-            name="Go to supermarket"
-            />
-            <Item
-             name="Do you my home work"/>
-            <Item
-             name="Play game"/>
-            <Item
-             name="Read novel"/>
-          
         </div>
-    )
+    )   
 }
 export default ListTodo
